@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Palvelimen tietojen kerääminen
+# Collect server information
 GENERATED_AT=$(date '+%Y-%m-%d %H:%M:%S %Z (%z)')
 UPTIME_TEXT=$(uptime -p)
 
@@ -10,7 +10,7 @@ DISK_PERCENT=${DISK_USAGE%\%}
 MEM_TOTAL=$(free -m | awk '/^Mem:/ {print $2}')
 MEM_AVAILABLE=$(free -m | awk '/^Mem:/ {print $7}')
 
-# Funktio levyn tilan tarkistamiseen
+# Function to check disck space status
 check_disk_status() {
     local usage=$1
 
@@ -23,7 +23,7 @@ check_disk_status() {
 
 DISK_STATUS=$(check_disk_status "$DISK_PERCENT")
 
-# HTML-raportin tiedostopolut
+# HTML-report file paths
 OUTPUT_FILE="/var/www/html/viikko3/index.html"
 GITHUB_URL="https://github.com/joezky/viikko3"
 
@@ -214,10 +214,17 @@ cat > "$TEMP_FILE" <<EOF
 
     <section>
         <h2>What I Learned</h2>
-        <p>
-            I learned how to use Bash commands
-            to collect information about a Linux server
-            and generate an HTML report.
+    <p>
+        I learned how to use Bash commands to collect
+        server information and generate an HTML report.
+    </p>
+    <p>
+        One problem I encountered was a 403 Forbidden
+        error when opening my website. The problem was
+        caused by incorrect file permissions.
+        I fixed it by using the chmod command to give
+        Nginx permission to read the HTML file.
+        After that, the website worked correctly.
         </p>
     </section>
 
